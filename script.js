@@ -140,48 +140,78 @@ if (audio) {
 
 
 /* =========================================
-   LATEST BLOG POST
+   BLOG POSTS
 ========================================= */
+
+async function loadBlogPosts() {
+    const response = await fetch("blog-posts/posts.json");
+
+    if (!response.ok) {
+        throw new Error("Unable to load blog post list.");
+    }
+
+    const posts = await response.json();
+
+    return Promise.all(
+        posts.map(async post => {
+            const postResponse = await fetch(`blog-posts/${post.file}`);
+
+            if (!postResponse.ok) {
+                throw new Error(`Unable to load ${post.file}`);
+            }
+
+            const markdown = await postResponse.text();
+
+            return {
+                ...post,
+                content: marked.parse(markdown)
+            };
+        })
+    );
+}
+
+
+/* FULL BLOG PAGE */
+
+const blogPostsContainer = document.getElementById("blog-posts");
+
+if (blogPostsContainer) {
+    loadBlogPosts()
+        .then(posts => {
+            blogPostsContainer.innerHTML = posts.map(post => `
+                <section class="blog-post">
+                    <p class="post-date">${post.date}</p>
+                    <h2>${post.title}</h2>
+                    <div class="post-content">${post.content}</div>
+                </section>
+            `).join("");
+        })
+        .catch(error => {
+            console.error("Error loading blog posts:", error);
+            blogPostsContainer.textContent = "Unable to load blog posts.";
+        });
+}
+
+
+/* HOMEPAGE LATEST POST */
 
 const latestPostContainer = document.getElementById("latest-post");
 
 if (latestPostContainer) {
-    fetch("blog.html")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Unable to load blog page.");
-            }
-
-            return response.text();
-        })
-        .then(html => {
-            const parser = new DOMParser();
-            const blogPage = parser.parseFromString(html, "text/html");
-
-            const latestPost = blogPage.querySelector(".blog-post");
-
-            if (!latestPost) {
+    loadBlogPosts()
+        .then(posts => {
+            if (posts.length === 0) {
                 latestPostContainer.textContent = "No blog posts yet.";
                 return;
             }
 
-            const date = latestPost.querySelector(".post-date");
-            const title = latestPost.querySelector("h2");
-            const content = latestPost.querySelector("p:not(.post-date)");
-
-            if (!date || !title || !content) {
-                throw new Error("The latest blog post is missing required information.");
-            }
+            const post = posts[0];
 
             latestPostContainer.innerHTML = `
-                <p class="post-date"></p>
-                <h3></h3>
-                <p></p>
+                <p class="post-date">${post.date}</p>
+                <h3>${post.title}</h3>
+                <div class="post-content">${post.content}</div>
             `;
-
-            latestPostContainer.querySelector(".post-date").textContent = date.textContent;
-            latestPostContainer.querySelector("h3").textContent = title.textContent;
-            latestPostContainer.querySelector("p:last-child").innerHTML = content.innerHTML;
         })
         .catch(error => {
             console.error("Error loading latest blog post:", error);
