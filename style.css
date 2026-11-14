@@ -490,3 +490,9 @@ footer {
 .bookmark span {
     font-size: 0.85rem;
 }
+
+@media (max-width: 650px) {
+    .lightbox-nav {
+        display: none;
+    }
+}
