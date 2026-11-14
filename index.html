@@ -45,32 +45,35 @@
 
         <section class="half-width" id="music">
             <h2>My Music</h2>
-            <p>Some things I've made.<br>I don't labor under the delusion that they're good, but they're mine!</p>
+            <p>
+                Some things I've made.<br>
+                I don't labor under the delusion that they're good, but they're mine!
+            </p>
 
             <div class="music-player">
 
                 <audio id="audio-player"></audio>
 
-            <div class="player-controls">
-                <button id="prev-track" type="button">⏮</button>
-                <button id="play-pause" type="button">▶</button>
-                <button id="next-track" type="button">⏭</button>
-            </div>
-
-            <div class="progress-container">
-                <div class="time-display">
-                    <span id="current-time">0:00</span>
-                    <span id="duration">0:00</span>
+                <div class="player-controls">
+                    <button id="prev-track" type="button">⏮</button>
+                    <button id="play-pause" type="button">▶</button>
+                    <button id="next-track" type="button">⏭</button>
                 </div>
 
-                <input
-                    type="range"
-                    id="progress-bar"
-                    min="0"
-                    max="100"
-                    value="0"
-                >
-            </div>
+                <div class="progress-container">
+                    <div class="time-display">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+
+                    <input
+                        type="range"
+                        id="progress-bar"
+                        min="0"
+                        max="100"
+                        value="0"
+                    >
+                </div>
 
                 <div class="playlist" id="playlist">
                     <button class="track-item" data-track="0" type="button">
@@ -148,10 +151,10 @@
 
     </main>
 
-
     <footer>
         <p>&copy; 2026 Sheepishly Onward</p>
     </footer>
+
 <script src="script.js" defer></script>
 </body>
 </html>
