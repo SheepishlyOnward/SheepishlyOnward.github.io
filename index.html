@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheepishly Onward</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <header>
+        <h1>Sheepishly Onward</h1>
+        <p>My little corner of the internet.</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="photos.html">Photos</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#music">Music</a>
+        <a href="index.html#about">About</a>
+    </nav>
+
+
+    <main class="homepage-grid">
+        <section class="full-width">
+            <h2>Welcome!</h2>
+            <p>
+                Welcome to my website. This is where I'll share
+                thoughts, photographs, music, and other things.
+            </p>
+        </section>
+
+        <section class="half-width">
+            <h2>Current Status</h2>
+            <div class="status-box">
+                <p>I'm making a website! How fun!<br><br>Fuck Facebook!</p>
+            </div>
+        </section>
+
+        <section class="half-width" id="music">
+            <h2>My Music</h2>
+            <p>Some things I've made.<br>I don't labor under the delusion that they're good, but they're mine!</p>
+
+            <div class="music-player">
+
+                <audio id="audio-player"></audio>
+
+            <div class="player-controls">
+                <button id="prev-track" type="button">⏮</button>
+                <button id="play-pause" type="button">▶</button>
+                <button id="next-track" type="button">⏭</button>
+            </div>
+
+            <div class="progress-container">
+                <div class="time-display">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <input
+                    type="range"
+                    id="progress-bar"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+            </div>
+
+                <div class="playlist" id="playlist">
+                    <button class="track-item" data-track="0" type="button">
+                        Lick the Night
+                    </button>
+                    <button class="track-item" data-track="1" type="button">
+                        LoFi Asparagus
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-photo full-width">
+            <h2>Featured Photo</h2>
+
+            <a href="photos.html">
+                <img
+                    src="images/2026-10-30-photos/IMG_7547.jpg"
+                    alt="A photograph from a walk together"
+                >
+            </a>
+
+            <h3>A Walk Together</h3>
+            <p class="photo-date">October 30, 2026</p>
+
+            <p>Photographs from a walk with my wife.</p>
+        </section>
+
+        <section class="featured-post full-width">
+            <h2>Latest from the Blog</h2>
+            <div id="latest-post">
+                <p>Loading latest post...</p>
+            </div>
+            <a href="blog.html">Read More →</a>
+        </section>
+
+        <section class="half-width">
+            <h2>Bookmarks</h2>
+
+            <h3>My Stuff</h3>
+            <div class="bookmark-list">
+                <a href="https://willfuldogs.com/" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>Willful Dogs</strong>
+                    <span>My dog training business.</span>
+                </a>
+            </div>
+
+            <h3>Games</h3>
+            <div class="bookmark-list">
+                <a href="https://buddyboardgames.com/azul?room=ZnJpZW5kem9uZQ%3D%3D&name=U3Zlbg%3D%3D#" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>Azul</strong>
+                    <span>Play Azul online with friends.</span>
+                </a>
+
+                <a href="https://colonist.io/" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>Settlers of Catan</strong>
+                    <span>An online strategy board game.</span>
+                </a>
+                <a href="https://songtrivia.io/" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>SongTrivia</strong>
+                    <span>A music trivia game.</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="half-width" id="about">
+                <h2>About</h2>
+                <img src="images/profile.jpg" alt="A photo of me" class="profile-photo">
+            <p>
+                Hey, I'm Sean. This website is my small way of protesting against big social media companies. I enjoy making things and doing things, but I struggle
+                to share updates with the people I care about. Every time I open Facebook or Instagram I feel yucky, so this is my solution!<br><br>
+
+                Among many other things, I am a dog trainer living and working in West Los Angeles. I have too many hobbies. I am sometimes embarrased by the 
+                immense breadth, and relatively shallow depth of my hobbies, some of which include bouldering, photography, racquetball, hiking, music, video games, 
+                computer bullshit, eating, crocheting, painting, TV, and the list keeps growing endlessly!<br><br>
+                Find me on Instagram (where I never post) <a href="https://www.instagram.com/wseanmiller"><strong>@WSeanMiller</strong></a>
+            </p>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>&copy; 2026 Sheepishly Onward</p>
+    </footer>
+    <script>
+        const tracks = [
+            {
+                title: "Lick the Night",
+                file: "music/Lick_the_night.mp3"
+            },
+            {
+                title: "LoFi Asparagus",
+                file: "music/lOfI_ASPARAGUs.mp3"
+            }
+        ];
+
+        const audio = document.getElementById("audio-player");
+        const progressBar = document.getElementById("progress-bar");
+        const currentTimeDisplay = document.getElementById("current-time");
+        const durationDisplay = document.getElementById("duration");
+        const playButton = document.getElementById("play-pause");
+        const prevButton = document.getElementById("prev-track");
+        const nextButton = document.getElementById("next-track");
+        const trackItems = document.querySelectorAll(".track-item");
+
+        let currentTrack = 0;
+
+        function loadTrack(index) {
+            currentTrack = index;
+            audio.src = tracks[currentTrack].file;
+
+            trackItems.forEach((item, i) => {
+                item.classList.toggle("active", i === currentTrack);
+            });
+        }
+
+        function playTrack() {
+            audio.play();
+            playButton.textContent = "Ⅱ";
+        }
+
+        function pauseTrack() {
+            audio.pause();
+            playButton.textContent = "▶";
+        }
+
+        playButton.addEventListener("click", () => {
+            if (audio.paused) {
+                playTrack();
+            } else {
+                pauseTrack();
+            }
+        });
+
+        prevButton.addEventListener("click", () => {
+            loadTrack((currentTrack - 1 + tracks.length) % tracks.length);
+            playTrack();
+        });
+
+        nextButton.addEventListener("click", () => {
+            loadTrack((currentTrack + 1) % tracks.length);
+            playTrack();
+        });
+
+        trackItems.forEach(item => {
+            item.addEventListener("click", () => {
+                loadTrack(Number(item.dataset.track));
+                playTrack();
+            });
+        });
+
+        audio.addEventListener("ended", () => {
+            loadTrack((currentTrack + 1) % tracks.length);
+            playTrack();
+        });
+
+        loadTrack(0);
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+
+            return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+        }
+
+        audio.addEventListener("loadedmetadata", () => {
+            progressBar.max = audio.duration;
+            durationDisplay.textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            progressBar.value = audio.currentTime;
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+        });
+
+        progressBar.addEventListener("input", () => {
+            audio.currentTime = progressBar.value;
+        });
+    </script>
+    <script>
+        fetch("blog.html")
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const blogPage = parser.parseFromString(html, "text/html");
+
+                const latestPost = blogPage.querySelector(".blog-post");
+                const homepageContainer = document.getElementById("latest-post");
+
+                if (latestPost) {
+                    const date = latestPost.querySelector(".post-date");
+                    const title = latestPost.querySelector("h2");
+                    const content = latestPost.querySelector("p:not(.post-date)");
+
+                    homepageContainer.innerHTML = `
+                        <p class="post-date">${date.textContent}</p>
+                        <h3>${title.textContent}</h3>
+                        <p>${content.innerHTML}</p>
+                    `;
+                } else {
+                    homepageContainer.textContent = "No blog posts yet.";
+                }
+            });
+    </script>
+</body>
+</html>
