@@ -116,18 +116,18 @@
 
             <h3>Games</h3>
             <div class="bookmark-list">
-                <a href="https://buddyboardgames.com/azul?room=ZnJpZW5kem9uZQ%3D%3D&name=U3Zlbg%3D%3D#" target="_blank" rel="noopener noreferrer" class="bookmark">
-                    <strong>Azul</strong>
-                    <span>Play Azul online with friends.</span>
+                <a href="https://ponderclub.co/" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>Ponder Club</strong>
+                    <span>Thoughtful games for restless minds.</span>
                 </a>
 
-                <a href="https://colonist.io/" target="_blank" rel="noopener noreferrer" class="bookmark">
-                    <strong>Settlers of Catan</strong>
-                    <span>An online strategy board game.</span>
+                <a href="https://tenminute.games/even-distance/" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>Even Distance</strong>
+                    <span>Name a city the same distance from both cities.</span>
                 </a>
-                <a href="https://songtrivia.io/" target="_blank" rel="noopener noreferrer" class="bookmark">
-                    <strong>SongTrivia</strong>
-                    <span>A music trivia game.</span>
+                <a href="https://www.ted.com/games/spellcheck" target="_blank" rel="noopener noreferrer" class="bookmark">
+                    <strong>Spellcheck</strong>
+                    <span>It's like a spelling bee in your browser.</span>
                 </a>
             </div>
         </section>
@@ -152,168 +152,6 @@
     <footer>
         <p>&copy; 2026 Sheepishly Onward</p>
     </footer>
-    <script>
-        const tracks = [
-            {
-                title: "Lick the Night",
-                file: "music/Lick_the_night.mp3"
-            },
-            {
-                title: "LoFi Asparagus",
-                file: "music/lOfI_ASPARAGUs.mp3"
-            }
-        ];
-
-        const audio = document.getElementById("audio-player");
-        const progressBar = document.getElementById("progress-bar");
-        const currentTimeDisplay = document.getElementById("current-time");
-        const durationDisplay = document.getElementById("duration");
-        const playButton = document.getElementById("play-pause");
-        const prevButton = document.getElementById("prev-track");
-        const nextButton = document.getElementById("next-track");
-        const trackItems = document.querySelectorAll(".track-item");
-
-        let currentTrack = 0;
-
-        function loadTrack(index) {
-            currentTrack = index;
-            audio.src = tracks[currentTrack].file;
-
-            trackItems.forEach((item, i) => {
-                item.classList.toggle("active", i === currentTrack);
-            });
-        }
-
-        function playTrack() {
-            audio.play();
-            playButton.textContent = "Ⅱ";
-        }
-
-        function pauseTrack() {
-            audio.pause();
-            playButton.textContent = "▶";
-        }
-
-        playButton.addEventListener("click", () => {
-            if (audio.paused) {
-                playTrack();
-            } else {
-                pauseTrack();
-            }
-        });
-
-        prevButton.addEventListener("click", () => {
-            loadTrack((currentTrack - 1 + tracks.length) % tracks.length);
-            playTrack();
-        });
-
-        nextButton.addEventListener("click", () => {
-            loadTrack((currentTrack + 1) % tracks.length);
-            playTrack();
-        });
-
-        trackItems.forEach(item => {
-            item.addEventListener("click", () => {
-                loadTrack(Number(item.dataset.track));
-                playTrack();
-            });
-        });
-
-        audio.addEventListener("ended", () => {
-            loadTrack((currentTrack + 1) % tracks.length);
-            playTrack();
-        });
-
-        loadTrack(0);
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = Math.floor(seconds % 60);
-
-            return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
-        }
-
-        audio.addEventListener("loadedmetadata", () => {
-            progressBar.max = audio.duration;
-            durationDisplay.textContent = formatTime(audio.duration);
-        });
-
-        audio.addEventListener("timeupdate", () => {
-            progressBar.value = audio.currentTime;
-            currentTimeDisplay.textContent = formatTime(audio.currentTime);
-        });
-
-        progressBar.addEventListener("input", () => {
-            audio.currentTime = progressBar.value;
-        });
-    </script>
-    <script>
-        fetch("blog.html")
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const blogPage = parser.parseFromString(html, "text/html");
-
-                const latestPost = blogPage.querySelector(".blog-post");
-                const homepageContainer = document.getElementById("latest-post");
-
-                if (latestPost) {
-                    const date = latestPost.querySelector(".post-date");
-                    const title = latestPost.querySelector("h2");
-                    const content = latestPost.querySelector("p:not(.post-date)");
-
-                    homepageContainer.innerHTML = `
-                        <p class="post-date">${date.textContent}</p>
-                        <h3>${title.textContent}</h3>
-                        <p>${content.innerHTML}</p>
-                    `;
-                } else {
-                    homepageContainer.textContent = "No blog posts yet.";
-                }
-            });
-
-        fetch("photos.html")
-            .then(response => response.text())
-            .then(async html => {
-                const parser = new DOMParser();
-                const photosPage = parser.parseFromString(html, "text/html");
-
-                const latestCollection = photosPage.querySelector(".photo-collection");
-
-                if (!latestCollection) return;
-
-                const images = Array.from(latestCollection.querySelectorAll(".photo-grid img"));
-
-                const landscapeImages = await Promise.all(
-                    images.map(image => {
-                        return new Promise(resolve => {
-                            const img = new Image();
-                            img.onload = () => resolve(
-                                img.naturalWidth > img.naturalHeight ? image : null
-                            );
-                            img.onerror = () => resolve(null);
-                            img.src = image.getAttribute("src");
-                        });
-                    })
-                );
-
-                const eligibleImages = landscapeImages.filter(Boolean);
-
-                if (eligibleImages.length === 0) return;
-
-                const randomImage = eligibleImages[
-                    Math.floor(Math.random() * eligibleImages.length)
-                ];
-
-                const title = latestCollection.querySelector("h2");
-                const date = latestCollection.querySelector(".photo-date");
-                const description = latestCollection.querySelector("p:not(.photo-date)");
-
-                document.getElementById("featured-photo-image").src = randomImage.getAttribute("src");
-                document.getElementById("featured-photo-image").alt = randomImage.alt;
-                document.getElementById("featured-photo-title").textContent = title.textContent;
-                document.getElementById("featured-photo-date").textContent = date.textContent;
-                document.getElementById("featured-photo-description").textContent = description.textContent;
-            });
-    </script>
+<script src="script.js" defer></script>
 </body>
 </html>
