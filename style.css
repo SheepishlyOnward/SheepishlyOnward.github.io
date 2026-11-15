@@ -393,22 +393,52 @@ overflow: hidden;
 
 
 /* ==============================
-   About Section
-================================= */
+ *  About Section
+ = *================================ */
 
-.profile-photo {
+.profile-flip {
+    position: relative;
+    float: right;
     width: 130px;
     height: 130px;
-    object-fit: cover;
-    border: 3px solid #25243A;
-    border-radius: 50%;
-}
-
-#about .profile-photo {
-    float: right;
     margin: 0 0 15px 20px;
+    perspective: 1000px;
 }
 
+.profile-front,
+.profile-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    backface-visibility: hidden;
+    box-sizing: border-box;
+    transition: transform 0.5s ease-in-out;
+}
+
+.profile-front {
+    border: 3px solid #25243A;
+    box-shadow: 5px 5px 0 #25243A;
+}
+
+.profile-back {
+    background: #FF6848;
+    border: 2px solid #25243A;
+    box-shadow: 5px 5px 0 #25243A;
+    padding: 15px;
+    transform: rotateY(180deg);
+}
+
+.profile-flip:hover .profile-front {
+    transform: rotateY(180deg);
+}
+
+.profile-flip:hover .profile-back {
+    transform: rotateY(360deg);
+}
 
 /* ==============================
    Current Status
