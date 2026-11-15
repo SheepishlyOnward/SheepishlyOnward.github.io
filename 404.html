@@ -157,20 +157,30 @@
         /* MOBILE */
 
         @media (max-width: 500px) {
+            header {
+                margin: 30px auto 20px;
+            }
+
             #sheep-says {
+                width: calc(100% - 40px);
+                max-width: 400px;
+                box-sizing: border-box;
                 padding: 20px 10px;
             }
 
-        .game-board {
-            grid-template-columns: repeat(3, 112px);
-            grid-template-rows: repeat(3, 112px);
-            gap: 8px;
-        }
+            .game-board {
+                grid-template-columns: repeat(3, 85px);
+                grid-template-rows: repeat(3, 85px);
+                gap: 8px;
+            }
 
-        .game-button {
-            width: 112px;
-            height: 112px;
-        }
+            .game-button {
+                width: 85px;
+                height: 85px;
+            }
+
+            .game-info {
+                gap: 20px;
             }
         }
     </style>
