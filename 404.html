@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - You've Wandered Off</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <style>
+        /* ==============================
+        404 Page
+        ================================= */
+
+        body {
+            text-align: center;
+        }
+
+        header {
+            margin: 50px auto 30px;
+        }
+
+        header h1 {
+            font-size: clamp(4rem, 10vw, 7rem);
+            margin-bottom: 0;
+        }
+
+        header p {
+            font-size: 1.3rem;
+        }
+
+        #sheep-says {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #FFFCF4;
+            border: 2px solid #25243A;
+            box-shadow: 5px 5px 0 #25243A;
+        }
+
+        .game-sheep {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border: 2px solid #25243A;
+            box-shadow: 5px 5px 0 #25243A;
+            border-radius: 8px;
+        }
+
+        #sheep-says h2 {
+            margin-top: 0;
+        }
+
+        #game-instructions {
+            max-width: 350px;
+            margin: 15px auto;
+        }
+
+        #game-status {
+            font-weight: bold;
+            margin: 25px 0;
+            min-height: 24px;
+        }
+
+        /* GAME BOARD */
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 135px);
+            grid-template-rows: repeat(3, 135px);
+            justify-content: center;
+            margin: 30px auto;
+        }
+
+        .game-button {
+            width: 135px;
+            height: 135px;
+            border: 2px solid #25243A;
+            border-radius: 50%;
+            box-shadow: 4px 4px 0 #25243A;
+            cursor: pointer;
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .game-button:active {
+            transform: scale(0.92);
+        }
+
+        .game-button.up {
+            grid-column: 2;
+            grid-row: 1;
+            background: #FF6848;
+        }
+
+        .game-button.left {
+            grid-column: 1;
+            grid-row: 2;
+            background: #6D83D9;
+        }
+
+        .game-button.right {
+            grid-column: 3;
+            grid-row: 2;
+            background: #C5D89D;
+        }
+
+        .game-button.down {
+            grid-column: 2;
+            grid-row: 3;
+            background: #25243A;
+        }
+
+        /* BUTTON HIGHLIGHT */
+
+        .game-button.active {
+            filter: brightness(1.4);
+            transform: scale(1.08);
+        }
+
+        /* GAME INFO */
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        #start-game {
+            background: #FF6848;
+            color: #25243A;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 12px 35px;
+            border: 2px solid #25243A;
+            border-radius: 8px;
+            box-shadow: 3px 3px 0 #25243A;
+            cursor: pointer;
+        }
+
+        #start-game:hover {
+            background: #C5D89D;
+        }
+
+        .home-link {
+            margin: 35px auto;
+        }
+
+        .home-link a {
+            color: #6D83D9;
+            font-weight: bold;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+            #sheep-says {
+                padding: 20px 10px;
+            }
+
+        .game-board {
+            grid-template-columns: repeat(3, 112px);
+            grid-template-rows: repeat(3, 112px);
+            gap: 8px;
+        }
+
+        .game-button {
+            width: 112px;
+            height: 112px;
+        }
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>404</h1>
+        <p>Bahh, You've wandered off.</p>
+    </header>
+
+    <main>
+        <section id="sheep-says">
+            <img src="images/favicon.png" alt="A little sheep" class="game-sheep">
+
+            <h2>Sheep Says</h2>
+            <p>I guess things could be worse.</p>
+
+            <div id="game-status">Want to play?</div>
+
+            <div class="game-board">
+                <button class="game-button up" data-direction="up" aria-label="Up"></button>
+                <button class="game-button left" data-direction="left" aria-label="Left"></button>
+                <button class="game-button right" data-direction="right" aria-label="Right"></button>
+                <button class="game-button down" data-direction="down" aria-label="Down"></button>
+            </div>
+
+            <div class="game-info">
+                <p>Score: <span id="score">0</span></p>
+                <p>High Score: <span id="high-score">0</span></p>
+            </div>
+
+            <button id="start-game" type="button">Start Game</button>
+        </section>
+
+        <p class="home-link">
+            <a href="index.html">← Back to the homepage</a>
+        </p>
+    </main>
+
+    <script>
+        const directions = ["up", "left", "right", "down"];
+
+        const keys = {
+            ArrowUp: "up",
+            w: "up",
+            ArrowLeft: "left",
+            a: "left",
+            ArrowRight: "right",
+            d: "right",
+            ArrowDown: "down",
+            s: "down"
+        };
+
+        const buttons = document.querySelectorAll(".game-button");
+        const startButton = document.getElementById("start-game");
+        const statusDisplay = document.getElementById("game-status");
+        const scoreDisplay = document.getElementById("score");
+        const highScoreDisplay = document.getElementById("high-score");
+
+        let sequence = [];
+        let playerPosition = 0;
+        let score = 0;
+        let gameActive = false;
+        let playingSequence = false;
+        let audioContext;
+
+        // Load saved high score
+        let highScore = Number(localStorage.getItem("sheepSaysHighScore")) || 0;
+        highScoreDisplay.textContent = highScore;
+
+        // Different notes for each direction
+        const notes = {
+            up: 392,
+            left: 330,
+            right: 494,
+            down: 262
+        };
+
+        function playSound(direction) {
+            if (!audioContext) return;
+
+            const oscillator = audioContext.createOscillator();
+            const volume = audioContext.createGain();
+
+            oscillator.frequency.value = notes[direction];
+            oscillator.type = "sine";
+
+            volume.gain.setValueAtTime(0.15, audioContext.currentTime);
+            volume.gain.exponentialRampToValueAtTime(
+                0.001,
+                audioContext.currentTime + 0.25
+            );
+
+            oscillator.connect(volume);
+            volume.connect(audioContext.destination);
+
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.25);
+        }
+
+        function sleep(milliseconds) {
+            return new Promise(resolve => setTimeout(resolve, milliseconds));
+        }
+
+        async function flashButton(direction) {
+            const button = document.querySelector(
+                `.game-button[data-direction="${direction}"]`
+            );
+
+            button.classList.add("active");
+            playSound(direction);
+
+            await sleep(300);
+
+            button.classList.remove("active");
+        }
+
+        async function playSequence() {
+            playingSequence = true;
+            statusDisplay.textContent = "Watch carefully...";
+
+            await sleep(600);
+
+            for (const direction of sequence) {
+                await flashButton(direction);
+                await sleep(200);
+            }
+
+            playingSequence = false;
+            statusDisplay.textContent = "Your turn!";
+        }
+
+        function nextRound() {
+            playerPosition = 0;
+
+            const randomDirection =
+                directions[Math.floor(Math.random() * directions.length)];
+
+            sequence.push(randomDirection);
+
+            playSequence();
+        }
+
+        function startGame() {
+            const AudioContextClass =
+                window.AudioContext || window.webkitAudioContext;
+
+            if (AudioContextClass && !audioContext) {
+                audioContext = new AudioContextClass();
+            }
+
+            if (audioContext && audioContext.state === "suspended") {
+                audioContext.resume();
+            }
+
+            sequence = [];
+            playerPosition = 0;
+            score = 0;
+            gameActive = true;
+
+            scoreDisplay.textContent = score;
+            statusDisplay.textContent = "Get ready...";
+            startButton.textContent = "Restart Game";
+
+            nextRound();
+        }
+
+        function gameOver() {
+            gameActive = false;
+
+            if (score > highScore) {
+                highScore = score;
+                highScoreDisplay.textContent = highScore;
+                localStorage.setItem("sheepSaysHighScore", highScore);
+            }
+
+            statusDisplay.textContent = `Game over! Your score: ${score}.`;
+            startButton.textContent = "Play Again";
+        }
+
+        function handleInput(direction) {
+            if (!gameActive || playingSequence) return;
+
+            flashButton(direction);
+
+            if (direction !== sequence[playerPosition]) {
+                gameOver();
+                return;
+            }
+
+            playerPosition++;
+
+            if (playerPosition === sequence.length) {
+                score++;
+                scoreDisplay.textContent = score;
+                statusDisplay.textContent = "Correct!";
+
+                setTimeout(() => {
+                    if (gameActive) {
+                        nextRound();
+                    }
+                }, 800);
+            }
+        }
+
+        // Mouse controls
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                handleInput(button.dataset.direction);
+            });
+        });
+
+        // Keyboard controls
+        document.addEventListener("keydown", event => {
+            const key = event.key.length === 1
+                ? event.key.toLowerCase()
+                : event.key;
+
+            const direction = keys[key];
+
+            if (!direction || !gameActive) return;
+
+            event.preventDefault();
+
+            if (event.repeat) return;
+
+            handleInput(direction);
+        });
+
+        // Start / restart button
+        startButton.addEventListener("click", startGame);
+    </script>
+
+</body>
+</html>
