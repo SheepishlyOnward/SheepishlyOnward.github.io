@@ -415,3 +415,70 @@ if (lightbox) {
         }, { passive: true });
     }
 }
+
+
+/* CURRENT STATUS */
+
+const currentStatus = document.getElementById("current-status");
+
+if (currentStatus) {
+    fetch("status/statuses.json")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Unable to load statuses.");
+        }
+
+        return response.json();
+    })
+    .then(statuses => {
+        if (statuses.length === 0) {
+            currentStatus.textContent = "No status yet.";
+            return;
+        }
+
+        currentStatus.textContent = statuses[0].text;
+        currentStatus.style.whiteSpace = "pre-line";
+    })
+    .catch(error => {
+        console.error("Error loading status:", error);
+        currentStatus.textContent = "Unable to load status.";
+    });
+}
+
+/* STATUS HISTORY */
+
+const statusList = document.getElementById("status-list");
+
+if (statusList) {
+    fetch("status/statuses.json")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Unable to load statuses.");
+        }
+
+        return response.json();
+    })
+    .then(statuses => {
+        if (statuses.length === 0) {
+            statusList.textContent = "No statuses yet.";
+            return;
+        }
+
+        statusList.innerHTML = statuses.map((status, index) => `
+        <article class="status-entry ${index % 2 === 0 ? "status-green" : "status-dark"}">
+        <p class="status-date">${status.date}</p>
+        <p class="status-text"></p>
+        </article>
+        `).join("");
+
+        const statusTexts = statusList.querySelectorAll(".status-text");
+
+        statuses.forEach((status, index) => {
+            statusTexts[index].textContent = status.text;
+        });
+    })
+    .catch(error => {
+        console.error("Error loading status history:", error);
+        statusList.textContent = "Unable to load status history.";
+    });
+}

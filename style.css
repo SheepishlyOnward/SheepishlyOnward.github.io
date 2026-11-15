@@ -456,6 +456,7 @@ overflow: hidden;
     border: 2px solid #25243A;
     border-radius: 8px;
     box-shadow: 3px 3px 0 #25243A;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .status-box p {
@@ -464,6 +465,16 @@ overflow: hidden;
     font-weight: 600;
 }
 
+.status-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.status-link:hover .status-box {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #25243A;
+}
 
 /* ==============================
    Responsive Layout
@@ -572,4 +583,59 @@ overflow: hidden;
 
 .post-content li {
     margin-bottom: 8px;
+}
+
+/* ==============================
+ *  Status History
+ = *================================ */
+
+#status-list {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 25px;
+}
+
+.status-entry {
+    width: 50%;
+    padding: 20px 25px;
+    border: 2px solid #25243A;
+    border-radius: 8px;
+    box-shadow: 5px 5px 0 #25243A;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.status-dark {
+    background-color: #25243A;
+    color: #C5D89D;
+}
+
+.status-green {
+    background-color: #C5D89D;
+    color: #25243A;
+}
+
+.status-date {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+    opacity: 0.75;
+    color: #6D83D9;
+    text-align:right;
+
+}
+
+.status-text {
+    margin-bottom: 0;
+    white-space: pre-line;
+    text-align:center;
+}
+
+@media (max-width: 600px) {
+    .status-entry {
+        width: 100%;
+    }
 }
