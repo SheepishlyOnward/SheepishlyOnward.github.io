@@ -4,6 +4,8 @@ Carl series. I don't want to get into spoilers, but it's a fun book. You know ho
 when you finally get around to enjoying it, there's no way for it to live up to the expectations? There's almost a part of you that wants it to 
 be bad. Well, fortunately or unfortunately this series is just as fun and enjoyable as everyone has hyped it up to be.
 
+![Reading Dungeon Crawler Carl with Finn](../images/blog-post-photos/reading-carl.jpg)
+
 Before I jumped into this series, I read 'Kill The Beast' by Serra Swift, which was another really fun and enjoyable little romantasy book.
 If you're looking for something light and easy, I highly recommend it. It makes for a nice weekend read.
 
