@@ -513,6 +513,7 @@ overflow: hidden;
     width: auto;
     height: auto;
     margin: 25px auto;
+    border-radius: 5px;
     border: 2px solid #25243A;
     box-shadow: 5px 5px #25243A;
 }
