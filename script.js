@@ -199,26 +199,41 @@ const latestPostContainer = document.getElementById("latest-post");
 
 if (latestPostContainer) {
     loadBlogPosts()
-        .then(posts => {
-            if (posts.length === 0) {
-                latestPostContainer.textContent = "No blog posts yet.";
-                return;
-            }
+    .then(posts => {
+        if (posts.length === 0) {
+            latestPostContainer.textContent = "No blog posts yet.";
+            return;
+        }
 
-            const post = posts[0];
+        const post = posts[0];
 
-            latestPostContainer.innerHTML = `
-                <p class="post-date">${post.date}</p>
-                <h3>${post.title}</h3>
-                <div class="post-content">${post.content}</div>
-            `;
-        })
-        .catch(error => {
-            console.error("Error loading latest blog post:", error);
-            latestPostContainer.textContent = "Unable to load the latest blog post.";
+        // Convert rendered HTML into separate paragraphs
+        const tempElement = document.createElement("div");
+        tempElement.innerHTML = post.content;
+
+        const paragraphs = Array.from(tempElement.querySelectorAll("p"))
+        .map(paragraph => paragraph.textContent.trim())
+        .filter(text => text !== "");
+
+        latestPostContainer.innerHTML = `
+        <p class="post-date">${post.date}</p>
+        <h3>${post.title}</h3>
+        <div class="post-preview">
+        ${paragraphs.map(paragraph => `<p></p>`).join("")}
+        </div>
+        `;
+
+        const previewParagraphs = latestPostContainer.querySelectorAll(".post-preview p");
+
+        paragraphs.forEach((paragraph, index) => {
+            previewParagraphs[index].textContent = paragraph;
         });
+    })
+    .catch(error => {
+        console.error("Error loading latest blog post:", error);
+        latestPostContainer.textContent = "Unable to load the latest blog post.";
+    });
 }
-
 
 /* =========================================
    FEATURED PHOTO

@@ -270,14 +270,13 @@ footer {
     margin-bottom: 8px;
 }
 
-#latest-post .post-content {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    line-clamp: 8;
-    -webkit-line-clamp: 8;
-    overflow: hidden;
+#latest-post .post-preview {
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 6;
+line-clamp: 6;
+overflow: hidden;
 }
-
 
 /* ==============================
    Music Player
