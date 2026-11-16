@@ -317,8 +317,8 @@ if (featuredPhotoImage) {
 
 
 /* =========================================
-   PHOTO GALLERY LIGHTBOX
-========================================= */
+ *  PHOTO GALLERY LIGHTBOX
+ = *======================================== */
 
 const lightbox = document.getElementById("photo-lightbox");
 
@@ -329,8 +329,7 @@ if (lightbox) {
     const prevButton = document.getElementById("prev-photo");
     const nextButton = document.getElementById("next-photo");
 
-    const photos = Array.from(document.querySelectorAll(".photo-grid img"));
-
+    let photos = [];
     let currentPhoto = 0;
 
     function showPhoto(index) {
@@ -344,18 +343,24 @@ if (lightbox) {
         photoCounter.textContent = `${currentPhoto + 1} / ${photos.length}`;
     }
 
+    const photoGrids = document.querySelectorAll(".photo-grid");
+
     if (
         lightboxImage &&
         photoCounter &&
         closeButton &&
         prevButton &&
-        nextButton &&
-        photos.length > 0
+        nextButton
     ) {
-        photos.forEach((photo, index) => {
-            photo.addEventListener("click", () => {
-                showPhoto(index);
-                lightbox.showModal();
+        photoGrids.forEach(grid => {
+            const gridPhotos = Array.from(grid.querySelectorAll("img"));
+
+            gridPhotos.forEach((photo, index) => {
+                photo.addEventListener("click", () => {
+                    photos = gridPhotos;
+                    showPhoto(index);
+                    lightbox.showModal();
+                });
             });
         });
 
