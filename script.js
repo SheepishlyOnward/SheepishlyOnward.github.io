@@ -422,7 +422,7 @@ if (lightbox) {
 const currentStatus = document.getElementById("current-status");
 
 if (currentStatus) {
-    fetch("status/statuses.json")
+    fetch("statuses.json")
     .then(response => {
         if (!response.ok) {
             throw new Error("Unable to load statuses.");
@@ -450,7 +450,7 @@ if (currentStatus) {
 const statusList = document.getElementById("status-list");
 
 if (statusList) {
-    fetch("status/statuses.json")
+    fetch("statuses.json")
     .then(response => {
         if (!response.ok) {
             throw new Error("Unable to load statuses.");
