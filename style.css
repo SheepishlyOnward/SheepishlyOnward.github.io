@@ -282,8 +282,8 @@ overflow: hidden;
 }
 
 /* ==============================
-   Music Player
-================================= */
+ *   Music Player
+ * ============================== */
 
 #music {
     background-color: #25243A;
@@ -394,7 +394,7 @@ overflow: hidden;
 
 /* ==============================
  *  About Section
- = *================================ */
+ *============================= */
 
 .profile-flip {
     position: relative;
@@ -500,8 +500,9 @@ overflow: hidden;
     }
 }
 
-
-/* Bookmarks */
+/* ==============================
+ *  Bookmarks
+ *=============================== */
 
 .bookmark-list {
     display: flex;
@@ -545,8 +546,10 @@ overflow: hidden;
     }
 }
 
-/* BLOG POST CONTENT */
 
+/* ==============================
+ *  BLOG POST CONTENT
+ *================================ */*
 .post-content img {
     display: block;
     max-width: 100%;
@@ -587,7 +590,7 @@ overflow: hidden;
 
 /* ==============================
  *  Status History
- = *================================ */
+ *=============================== */
 
 #status-list {
 display: flex;
@@ -639,6 +642,10 @@ gap: 25px;
         width: 100%;
     }
 }
+/*=================================
+ * AUDIO PLAYER
+ * ================================*/
+
 .audio-player {
     display: block;
     width: 100%;
