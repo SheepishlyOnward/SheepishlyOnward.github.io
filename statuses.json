@@ -1,6 +1,10 @@
 [
     {
         "date": "11/16/26",
+        "text": "Testing the new remote status updater."
+    },
+    {
+        "date": "11/16/26",
         "text": "It's time to chuck Chuck!"
     },
     {
@@ -32,15 +36,15 @@
         "text": "Really looking forward to getting my new M-VAVE FM-1!\n\nIt should arrive any day. But do I install Baud Girl or Skiff first? (or one of the other 217 options?)"
     },
     {
-        "date":"11/13/26",
-        "text":"Thinking about onomatopoetic avian nomenclature.\n\nDo you think crows were named for their vocalizations?\n\n(Imagine if pelicans, flamingoes, or penguins were.)"
+        "date": "11/13/26",
+        "text": "Thinking about onomatopoetic avian nomenclature.\n\nDo you think crows were named for their vocalizations?\n\n(Imagine if pelicans, flamingoes, or penguins were.)"
     },
     {
-        "date":"11/13/26",
-        "text":"I'm off to go read more Dungeon Crawler Carl!"
+        "date": "11/13/26",
+        "text": "I'm off to go read more Dungeon Crawler Carl!"
     },
     {
-        "date":"11/12/26",
-        "text":"I'm making a website! How fun!"
+        "date": "11/12/26",
+        "text": "I'm making a website! How fun!"
     }
 ]
