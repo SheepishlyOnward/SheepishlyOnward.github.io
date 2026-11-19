@@ -487,3 +487,51 @@ if (statusList) {
         statusList.textContent = "Unable to load status history.";
     });
 }
+
+/* =========================================
+ *  STATUS UPDATE FORM
+ = *======================================== */
+
+const statusForm = document.getElementById("status-form");
+
+if (statusForm) {
+    statusForm.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const password = document.getElementById("status-password").value;
+        const status = document.getElementById("status-text").value;
+        const message = document.getElementById("status-message");
+        const submitButton = statusForm.querySelector("button[type='submit']");
+
+        message.textContent = "Submitting...";
+        submitButton.disabled = true;
+
+        try {
+            const response = await fetch(
+                "https://sheepish-status-updater.wseanmiller.workers.dev/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ password, status })
+                }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Something went wrong.");
+            }
+
+            message.textContent = "Status submitted successfully!";
+            document.getElementById("status-text").value = "";
+            document.getElementById("status-password").value = "";
+
+        } catch (error) {
+            message.textContent = error.message;
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+}

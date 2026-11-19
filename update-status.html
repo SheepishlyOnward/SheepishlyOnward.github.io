@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Status</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Update Status</a></h1>
+        <p>A place where i can update my status.</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="photos.html">Photos</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#music">Music</a>
+        <a href="index.html#about">About</a>
+    </nav>
+    <main>
+        <section>
+
+            <form id="status-form">
+                <label for="status-password">Password</label>
+                <input
+                    type="password"
+                    id="status-password"
+                    required
+                >
+
+                <label for="status-text">Your status</label>
+                <textarea
+                    id="status-text"
+                    rows="6"
+                    maxlength="2000"
+                    required
+                ></textarea>
+
+                <button type="submit">Submit Status</button>
+
+                <p id="status-message" role="status"></p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

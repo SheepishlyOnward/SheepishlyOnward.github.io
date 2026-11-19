@@ -657,3 +657,79 @@ gap: 25px;
     border-radius: 8px;
     box-shadow: 5px 5px 0 #25243A;
 }
+
+
+/* =========================================
+ *  STATUS UPDATE FORM
+ = *======================================== */
+
+#status-form {
+max-width: 550px;
+margin: 30px auto;
+padding: 30px;
+background-color: #FFFCF4;
+border: 2px solid #25243A;
+box-shadow: 5px 5px 0 #25243A;
+box-sizing: border-box;
+}
+
+#status-form label {
+display: block;
+margin: 20px 0 8px;
+font-weight: 700;
+}
+
+#status-form input,
+#status-form textarea {
+display: block;
+width: 100%;
+box-sizing: border-box;
+padding: 12px;
+font: inherit;
+color: #25243A;
+background-color: #F4EEDC;
+border: 2px solid #25243A;
+border-radius: 4px;
+}
+
+#status-form textarea {
+resize: vertical;
+min-height: 150px;
+}
+
+#status-form input:focus,
+#status-form textarea:focus {
+outline: 2px solid #6D83D9;
+outline-offset: 2px;
+}
+
+#status-form button {
+display: block;
+margin-top: 25px;
+padding: 12px 24px;
+font: inherit;
+font-weight: 700;
+color: #25243A;
+background-color: #FF6848;
+border: 2px solid #25243A;
+border-radius: 6px;
+box-shadow: 3px 3px 0 #25243A;
+cursor: pointer;
+transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#status-form button:hover {
+background-color: #C5D89D;
+transform: translate(2px, 2px);
+box-shadow: 1px 1px 0 #25243A;
+}
+
+#status-form button:disabled {
+opacity: 0.6;
+cursor: wait;
+}
+
+#status-message {
+margin-top: 20px;
+font-weight: 700;
+}
