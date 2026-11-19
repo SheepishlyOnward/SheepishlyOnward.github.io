@@ -664,11 +664,12 @@ gap: 25px;
  = *======================================== */
 
 #status-form {
-max-width: 550px;
+max-width: 600px;
 margin: 30px auto;
 padding: 30px;
 background-color: #FFFCF4;
 border: 2px solid #25243A;
+border-radius: 8px;
 box-shadow: 5px 5px 0 #25243A;
 box-sizing: border-box;
 }
