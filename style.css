@@ -733,3 +733,18 @@ cursor: wait;
 margin-top: 20px;
 font-weight: 700;
 }
+
+
+.footer-admin {
+    color: inherit;
+    text-decoration: none;
+    cursor: default;
+}
+.footer-admin,
+.footer-admin:visited,
+.footer-admin:hover,
+.footer-admin:active {
+    color: inherit;
+    text-decoration: none;
+    cursor: default;
+}
