@@ -738,7 +738,7 @@ font-weight: 700;
 .footer-admin {
     color: inherit;
     text-decoration: none;
-    cursor: default;
+    cursor: text;
 }
 .footer-admin,
 .footer-admin:visited,
@@ -746,5 +746,5 @@ font-weight: 700;
 .footer-admin:active {
     color: inherit;
     text-decoration: none;
-    cursor: default;
+    cursor: text;
 }
